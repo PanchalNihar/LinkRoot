@@ -19,6 +19,7 @@ export default function AuthProvider({children}) {
             password
         }
         setLoading(true)
+        console.log('Login Data:', data);
         await axios.post('/auth/token/login/', data)
         .then((response)=>{
             console.log(response)
@@ -32,26 +33,33 @@ export default function AuthProvider({children}) {
     
     }
     
-    const onRegister = async (email , password , re_password) => {
-        setLoading(true)
+    const onRegister = async (email, password, re_password) => {
+        setLoading(true);
         const data = {
             email,
             password,
             re_password
-        }
-
-        
+        };
     
-        await axios.post('/auth/users/', data)
-        .then((response)=>{
-           console.log(response.data)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-        
-        setLoading(false)
-    }
+        try {
+            const response = await axios.post('/auth/users/', data);
+            console.log('Registration successful:', response.data);
+        } catch (error) {
+            if (error.response) {
+                // Log the error response from the server to see what's wrong with the data
+                console.log('Error response:', error.response.data);
+            } else if (error.request) {
+                // No response received from server
+                console.log('Error request:', error.request);
+            } else {
+                // Other errors
+                console.log('Error message:', error.message);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+    
     
     const onLogout = async() => {
         await localStorage.removeItem('auth_token')

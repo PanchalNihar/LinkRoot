@@ -8,7 +8,7 @@ import Footer from './components/Footer'
 export default function Login() {
 
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState('')  
   const { onLogin } = useContext(AuthContext)
 
   const navigate = useNavigate()

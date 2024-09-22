@@ -17,15 +17,15 @@
 }
 
 
- .half-screen-container{
+.half-screen-container {
     height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to right, rgba(74,19,223), #eeb806);
-    background-size: 200% 200%;
-    animation: wave 5s infinite linear;
+    background: linear-gradient(to right, #0F2027, #203A43, #2C5364, #1E3C72, #2A5298); /* Dark modern gradient */
+    background-size: 300% 300%;
+    animation: wave 6s infinite ease-in-out;
 }
 
