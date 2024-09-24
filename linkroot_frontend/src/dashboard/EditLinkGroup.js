@@ -16,7 +16,6 @@ export default function EditLinkGroup() {
   const { id } = useParams()
 
   useEffect(() => {
-
     const check = () => {
       const isAuth = localStorage.getItem('isAuthenticated')
       if (isAuth == null) {
@@ -305,5 +304,5 @@ export default function EditLinkGroup() {
     }
   }
 
-
+  
 }

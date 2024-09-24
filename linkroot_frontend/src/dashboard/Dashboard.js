@@ -76,10 +76,10 @@ export default function Dashboard() {
         </dialog>
         <div className="h-full w-full">
           {linkGroups.length > 0 ? (
-            <div className="w-full h-full grid grid-cols-4 gap-14">
+            <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
               {linkGroups.map((linkGroup) => (
                 <div
-                  className="w-auto transform hover:scale-105 transition-transform duration-300"
+                  className="w-full transform hover:scale-105 transition-transform duration-300"
                   key={linkGroup.id}
                 >
                   <div className="h-28 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-t-lg"></div>
@@ -115,7 +115,7 @@ export default function Dashboard() {
               ))}
             </div>
           ) : (
-            <div className="h-full w-full flex">
+            <div className="h-full w-full flex justify-center items-center">
               <p>No Link Groups Found</p>
             </div>
           )}

@@ -1,12 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import logo from '../logo.svg';
 
-export default function Nav() {
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const isDashboard = location.pathname.startsWith('/dashboard');
   const navigate = useNavigate();
   const { onLogout } = useContext(AuthContext);
+
+  const isDashboard = location.pathname.startsWith('/dashboard');
+
+  // Toggle the mobile menu
+  const handleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   const handleLogout = async () => {
     await onLogout();
@@ -14,91 +22,103 @@ export default function Nav() {
   };
 
   return (
-    <header className="bg-white shadow-md w-full h-16 flex items-center fixed top-0 z-50">
-      <div className="w-full flex justify-between items-center px-6 md:px-12">
-        {/* Logo */}
-        <div className="flex items-center">
-          {/* Changed Link to a regular anchor tag */}
-          <a href="/" className="flex title-font font-medium items-center text-gray-900">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-10 h-10 text-white p-2 bg-gradient-to-r from-teal-400 to-cyan-500 rounded-full"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span className="ml-3 text-2xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500">
-              LinkRoot
-            </span>
-          </a>
-        </div>
+    <nav className="p-3 flex bg-white justify-between items-center fixed top-0 left-0 right-0 z-20 shadow-md">
+      {/* Brand Section */}
+      <Link to="/" id="brand" className="flex gap-2 items-center flex-1">
+        <img className="object-cover max-w-12 max-h-12" src={logo} alt="Logo" />
+        <span className="text-lg font-medium font-display">LinkRoot</span>
+      </Link>
 
-        {/* Navigation Links */}
+      {/* Desktop Menu */}
+      <div id="nav-menu" className="hidden lg:flex gap-12">
         {isDashboard ? (
-          <div className="flex gap-6 items-center">
-            <Link
-              to="/dashboard"
-              className="text-gray-900 text-lg font-semibold hover:text-teal-500 transition duration-300"
-            >
-              Dashboard
-            </Link>
+          <>
+            <Link to="/dashboard" className="font-medium hover:text-primary">Dashboard</Link>
             <button
-              className="btn btn-outline btn-sm px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-lg transition duration-300 flex items-center"
+              className="btn btn-error btn-outline btn-sm text-white"
               onClick={handleLogout}
             >
               Logout
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
+              <i className="fa-solid fa-arrow-right ml-1"></i>
             </button>
-          </div>
+          </>
         ) : (
-          <div className="flex gap-4 items-center">
-            <Link
-              to="/"
-              className="text-gray-900 text-lg font-medium hover:text-teal-500 transition duration-300"
-            >
-              Home
-            </Link>
-            <Link
-              to="/register"
-              className="text-gray-900 text-lg font-medium hover:text-teal-500 transition duration-300"
-            >
-              Register
-            </Link>
-            <Link
-              to="/login"
-              className="inline-flex items-center bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition duration-300"
-            >
-              Login
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </Link>
-          </div>
+          <>
+            <Link to="/" className="font-medium hover:text-primary">Home</Link>
+            <Link to="/register" className="font-medium hover:text-primary">Register</Link>
+            <Link to="/login" className="font-medium hover:text-primary">Login</Link>
+            
+
+          </>
         )}
       </div>
-    </header>
+
+      {/* Desktop Button */}
+      {!isDashboard && (
+        <div className="hidden lg:flex flex-1 justify-end">
+          <button className="flex gap-2 items-center border border-gray-400 px-6 py-2 rounded-lg hover:border-gray-600">
+            <img src="./assets/asset 1.svg" alt="" />
+            <span className="font-display font-medium">LinkRoot</span>
+            <i className="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      )}
+
+      {/* Mobile Menu Toggle Button */}
+      <button className="p-2 lg:hidden" onClick={handleMenu}>
+        <i className="fa-solid fa-bars text-gray-600"></i>
+      </button>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div id="nav-dialog" className="fixed z-10 md:hidden bg-white inset-0 p-3">
+          {/* Mobile Navbar Brand */}
+          <div id="nav-bar" className="flex justify-between">
+            <Link to="/" id="brand" className="flex gap-2 items-center">
+              <img className="object-cover max-w-12 max-h-12" src="./assets/asset 0.png" alt="Logo" />
+              <span className="text-lg font-medium font-display">LinkRoot</span>
+            </Link>
+            <button className="p-2 md:hidden" onClick={handleMenu}>
+              <i className="fa-solid fa-xmark text-gray-600"></i>
+            </button>
+          </div>
+
+          {/* Mobile Menu Links */}
+          <div className="mt-6">
+            {isDashboard ? (
+              <>
+                <Link to="/dashboard" className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg">
+                  Dashboard
+                </Link>
+                <button className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg" onClick={handleLogout}>
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/" className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg">Home</Link>
+                <Link to="/register" className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg">Register</Link>
+                <Link to="/login" className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg">Login</Link>
+                
+
+              </>
+            )}
+          </div>
+
+          {/* Divider */}
+          <div className="h-[1px] bg-gray-300"></div>
+
+          {/* Mobile Button */}
+          {!isDashboard && (
+            <button className="mt-6 w-full flex gap-2 items-center px-6 py-4 rounded-lg hover:bg-gray-50">
+              <img src="./assets/asset 1.svg" alt="" />
+              <span>Download Now</span>
+            </button>
+          )}
+        </div>
+      )}
+    </nav>
   );
-}
+};
+
+export default Navbar;
