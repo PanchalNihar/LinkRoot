@@ -1,15 +1,17 @@
-import React from 'react'
-import Nav from './Nav'
+// src/components/Layout.js
+import React from 'react';
+import { Outlet } from 'react-router-dom'; // Import Outlet from react-router-dom
+import Nav from './Nav';
 
-export default function Layout({children}) {
+export default function Layout() {
   return (
-    <div className='w-full h-screen' >
+    <div className="w-full h-screen">
+      <Nav />
 
-    <Nav/>
-
-        <div className="h-full w-full">
-            {children}
-        </div>
+      <div className="h-full w-full">
+        {/* Use Outlet to render nested routes */}
+        <Outlet />
+      </div>
     </div>
-  )
+  );
 }

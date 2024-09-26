@@ -6,5 +6,4 @@ urlpatterns = [
    path('user/linkgroups/', UserLinkGroupAPIView.as_view(), name='user-linkgroups'),
    path('user/linkgroups/create/', UserLinkGroupAPIView.as_view(), name='user-linkgroups-create'),
    path('user/linkgroups/<int:linkgroup_id>/', UserLinkGroupAPIView.as_view(), name='user-linkgroups-detail'),
-
 ]

@@ -9,8 +9,8 @@ function ClickUpTestimonial() {
         <div>
           <div className="flex items-center mb-6">
             <img
-              src="/placeholder.svg?height=40&width=40&text=CU"
-              alt="ClickUp Logo"
+              src="/"
+              alt="Logo"
               className="w-12 h-12 mr-4"
             />
             <h2 className="text-3xl font-bold">ClickUp</h2>

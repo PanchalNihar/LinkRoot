@@ -18,16 +18,52 @@
 
 
 .half-screen-container {
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to right, #0F2027, #203A43, #2C5364, #1E3C72, #2A5298); /* Dark modern gradient */
-    background-size: 300% 300%;
-    animation: wave 6s infinite ease-in-out;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #2a2a2a, #3e3e3e); /* Darker gradient for contrast */
 }
+
+.link-card {
+  background: rgba(255, 255, 255, 0.15); /* Semi-transparent white background */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Deeper shadow for 3D effect */
+  color: #f0f0f0; /* Light text color */
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+  cursor: pointer; /* Indicate it's clickable */
+}
+
+.link-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); /* Enhanced shadow on hover */
+}
+
+.text-link {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Use the link-card color */
+  font-weight: bold; /* Make the link title bold */
+  display: block; /* Make the entire card clickable */
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
 
 @keyframes scrollRight {
     0% {

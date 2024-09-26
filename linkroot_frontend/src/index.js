@@ -8,11 +8,11 @@ import LinksProvider from './context/LinksContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <AuthProvider>
       <LinksProvider>
         <App />
       </LinksProvider>
     </AuthProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
