@@ -1,15 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext'; // Import AuthContext
 import logo from '../logo.svg';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { onLogout } = useContext(AuthContext);
-
-  const isDashboard = location.pathname.startsWith('/dashboard');
+  const { onLogout, isAuthenticated } = useContext(AuthContext); // Access isAuthenticated
 
   // Toggle the mobile menu
   const handleMenu = () => {
@@ -31,9 +29,11 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <div id="nav-menu" className="hidden lg:flex gap-12">
-        {isDashboard ? (
+        {isAuthenticated ? (
           <>
-            <Link to="/dashboard" className="font-medium hover:text-primary">Dashboard</Link>
+            <Link to="/dashboard" className="font-medium hover:text-primary">
+              Dashboard
+            </Link>
             <button
               className="btn btn-error btn-outline btn-sm text-white"
               onClick={handleLogout}
@@ -44,17 +44,21 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to="/" className="font-medium hover:text-primary">Home</Link>
-            <Link to="/register" className="font-medium hover:text-primary">Register</Link>
-            <Link to="/login" className="font-medium hover:text-primary">Login</Link>
-            
-
+            <Link to="/" className="font-medium hover:text-primary">
+              Home
+            </Link>
+            <Link to="/register" className="font-medium hover:text-primary">
+              Register
+            </Link>
+            <Link to="/login" className="font-medium hover:text-primary">
+              Login
+            </Link>
           </>
         )}
       </div>
 
       {/* Desktop Button */}
-      {!isDashboard && (
+      {!isAuthenticated && (
         <div className="hidden lg:flex flex-1 justify-end">
           <button className="flex gap-2 items-center border border-gray-400 px-6 py-2 rounded-lg hover:border-gray-600">
             <img src="./assets/asset 1.svg" alt="" />
@@ -75,7 +79,11 @@ const Navbar = () => {
           {/* Mobile Navbar Brand */}
           <div id="nav-bar" className="flex justify-between">
             <Link to="/" id="brand" className="flex gap-2 items-center">
-              <img className="object-cover max-w-12 max-h-12" src="./assets/asset 0.png" alt="Logo" />
+              <img
+                className="object-cover max-w-12 max-h-12"
+                src="./assets/asset 0.png"
+                alt="Logo"
+              />
               <span className="text-lg font-medium font-display">LinkRoot</span>
             </Link>
             <button className="p-2 md:hidden" onClick={handleMenu}>
@@ -85,22 +93,41 @@ const Navbar = () => {
 
           {/* Mobile Menu Links */}
           <div className="mt-6">
-            {isDashboard ? (
+            {isAuthenticated ? (
               <>
-                <Link to="/dashboard" className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg">
+                <Link
+                  to="/dashboard"
+                  className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg"
+                >
                   Dashboard
                 </Link>
-                <button className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg" onClick={handleLogout}>
+                <button
+                  className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg"
+                  onClick={handleLogout}
+                >
                   Logout
                 </button>
               </>
             ) : (
               <>
-                <Link to="/" className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg">Home</Link>
-                <Link to="/register" className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg">Register</Link>
-                <Link to="/login" className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg">Login</Link>
-                
-
+                <Link
+                  to="/"
+                  className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/register"
+                  className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg"
+                >
+                  Register
+                </Link>
+                <Link
+                  to="/login"
+                  className="font-medium m-3 p-3 hover:bg-gray-50 block rounded-lg"
+                >
+                  Login
+                </Link>
               </>
             )}
           </div>
@@ -109,7 +136,7 @@ const Navbar = () => {
           <div className="h-[1px] bg-gray-300"></div>
 
           {/* Mobile Button */}
-          {!isDashboard && (
+          {!isAuthenticated && (
             <button className="mt-6 w-full flex gap-2 items-center px-6 py-4 rounded-lg hover:bg-gray-50">
               <img src="./assets/asset 1.svg" alt="" />
               <span>Download Now</span>
