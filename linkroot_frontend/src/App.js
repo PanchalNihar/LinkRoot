@@ -21,7 +21,6 @@ function App() {
         <Route path="/dashboard/*" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path=":id/edit" element={<EditLinkGroup />} />
-          <Route path="analytics" element={<Analytics />} />
         </Route>
       </Routes>
     </Router>

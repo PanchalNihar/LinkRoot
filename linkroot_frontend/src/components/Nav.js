@@ -34,9 +34,7 @@ const Navbar = () => {
             <Link to="/dashboard" className="font-medium hover:text-primary">
               Dashboard
             </Link>
-            <Link to="/dashboard/analytics" className="font-medium hover:text-primary"> {/* Updated Link */}
-              Analytics
-            </Link>
+            
             <button
               className="btn btn-error btn-outline btn-sm text-white"
               onClick={handleLogout}

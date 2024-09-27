@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { LinksContext } from "../context/LinksContext";
-import { BiSolidTrash, BiEdit, BiLinkExternal } from "react-icons/bi";
+import { BiSolidTrash, BiEdit, BiLinkExternal, BiQr } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { QRCodeCanvas } from "qrcode.react"; // Import QR Code generator
 
 export default function Dashboard() {
   const { createGroup, getAllLinks, linkGroups, linksLoading, deleteGroup } =
@@ -11,6 +12,8 @@ export default function Dashboard() {
 
   const [name, setName] = useState("");
   const [groups, setGroups] = useState(linkGroups || []); // Ensure default value is an array
+  const [selectedGroupQR, setSelectedGroupQR] = useState(null); // State to manage QR Code modal
+  const qrCodeRef = useRef(); // Ref to access the QR Code canvas element
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,6 +52,25 @@ export default function Dashboard() {
     // Optionally save the new order to the backend
   };
 
+  const openQRModal = (uniqueString) => {
+    setSelectedGroupQR(uniqueString); // Set the selected group for which QR will be shown
+    document.getElementById("qr_modal").showModal();
+  };
+
+  const downloadQRCode = () => {
+    const qrCanvas = qrCodeRef.current.querySelector("canvas");
+    const pngUrl = qrCanvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = `${selectedGroupQR}_QRCode.png`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
   if (linksLoading) {
     return (
       <div className="h-full w-full flex justify-center items-center">
@@ -69,6 +91,7 @@ export default function Dashboard() {
           </button>
         </div>
         <div className="divider"></div>
+
         <dialog id="my_modal_1" className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Create Group</h3>
@@ -90,6 +113,40 @@ export default function Dashboard() {
             </div>
           </div>
         </dialog>
+
+        {/* QR Code Modal */}
+        <dialog id="qr_modal" className="modal">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">QR Code</h3>
+            <div className="flex items-center gap-4" ref={qrCodeRef}>
+              {selectedGroupQR && (
+                <>
+                  {/* QR Code */}
+                  <QRCodeCanvas
+                    value={`http://yourdomain.com/r/${selectedGroupQR}`}
+                    size={150}
+                    style={{ position: "relative", zIndex: 1 }}
+                  />
+                </>
+              )}
+              {/* Image on the right side */}
+              <img
+                src="/linkroot.png" // Replace with your actual image URL
+                alt="QR Code Side Image"
+                className="object-contain h-40 w-40"
+              />
+            </div>
+            <div className="modal-action flex gap-4">
+              <button className="btn btn-primary" onClick={downloadQRCode}>
+                Download QR Code
+              </button>
+              <form method="dialog">
+                <button className="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+
         <div className="h-full w-full">
           {groups.length > 0 ? (
             <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -133,12 +190,19 @@ export default function Dashboard() {
                                   <BiEdit />
                                 </Link>
                                 <button
-                                  onClick={() => {
-                                    deleteGroup(linkGroup.id);
-                                  }}
+                                  onClick={() => deleteGroup(linkGroup.id)}
                                   className="btn text-white btn-error btn-xs hover:scale-110 transition-transform duration-300"
                                 >
                                   <BiSolidTrash />
+                                </button>
+                                {/* QR Code Button */}
+                                <button
+                                  onClick={() =>
+                                    openQRModal(linkGroup.unique_string)
+                                  }
+                                  className="btn text-white btn-info btn-xs hover:scale-110 transition-transform duration-300"
+                                >
+                                  <BiQr />
                                 </button>
                               </div>
                             </div>

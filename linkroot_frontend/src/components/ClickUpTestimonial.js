@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from './clickup.png'; // Adjust the filename and extension
+import React from "react";
+import Image from "./clickup.png"; // Adjust the filename and extension
 
 function ClickUpTestimonial() {
   return (
@@ -7,41 +7,39 @@ function ClickUpTestimonial() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Left side content */}
         <div>
-          <div className="flex items-center mb-6">
-            <img
-              src="/"
-              alt="Logo"
-              className="w-12 h-12 mr-4"
-            />
-            <h2 className="text-3xl font-bold">ClickUp</h2>
-          </div>
           <h3 className="text-2xl font-semibold mb-4">
-            ClickUp used LinkRoot to get their desktop app in front of customers in days instead of months.
+            LinkRoot empowers users to create personalized link hubs, making
+            sharing and managing links easier than ever.
           </h3>
           <div className="flex flex-wrap gap-2 mb-6">
-            {["Chromeless UI", "Native spellcheck", "Task time in menubar", "Notification count in the dock", "Global hotkey to create task"].map((feature, index) => (
-              <span key={index} className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full border border-yellow-200">
+            {[
+              "Create Custom Link Groups",
+              "Generate Unique QR Codes",
+              "Effortless Link Management",
+              "Dynamic Real-Time Updates",
+              "Secure User Authentication",
+            ].map((feature, index) => (
+              <span
+                key={index}
+                className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full border border-yellow-200 transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-md hover:bg-yellow-200"
+              >
                 ✓ {feature}
               </span>
             ))}
           </div>
+
           <blockquote className="text-gray-600 italic mb-6 text-lg">
-            "LinkRoot provided us with a polished desktop app in no time. Their expert team guided us through a smooth migration from our outdated legacy desktop app."
+            "LinkRoot revolutionized our way of organizing and sharing links.
+            With its intuitive design and powerful features, managing links has
+            never been more seamless."
           </blockquote>
-          <div className="flex items-center">
-            <div className="w-16 h-16 rounded-full bg-gray-200 mr-4"></div>
-            <div>
-              <p className="font-semibold text-lg">Zeb Evans</p>
-              <p className="text-sm text-gray-500">Founder & CEO, ClickUp</p>
-            </div>
-          </div>
         </div>
 
         {/* Right side image */}
         <div>
           <img
             src={Image}
-            alt="Custom"
+            alt="LinkRoot"
             className="w-full rounded-lg shadow-lg"
           />
         </div>
