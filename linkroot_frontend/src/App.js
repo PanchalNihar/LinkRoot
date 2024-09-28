@@ -8,7 +8,6 @@ import PublicLinkGroup from "./PublicLinkGroup";
 import Layout from "./components/Layout"; // Ensure the correct path
 import Dashboard from "./dashboard/Dashboard";
 import EditLinkGroup from "./dashboard/EditLinkGroup";
-import Analytics from "./dashboard/Analytics";
 
 function App() {
   return (

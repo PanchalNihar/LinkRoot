@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext'; // Import AuthContext
 import logo from '../logo.svg';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
   const { onLogout, isAuthenticated } = useContext(AuthContext); // Access isAuthenticated
 

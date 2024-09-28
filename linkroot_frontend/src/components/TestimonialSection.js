@@ -1,17 +1,4 @@
-import React from 'react';
-
-// Avatar component (simple version)
-function Avatar({ image, fallback }) {
-  return (
-    <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-      {image ? (
-        <img src={image} alt={fallback} className="h-full w-full rounded-full" />
-      ) : (
-        <span>{fallback}</span>
-      )}
-    </div>
-  );
-}
+import React from "react";
 
 // TestimonialCard component with a diagonal, subtle gradient on hover
 function TestimonialCard({ title, description, details }) {
@@ -36,25 +23,25 @@ function TestimonialCard({ title, description, details }) {
 export default function TestimonialSection() {
   const cards = [
     {
-      title: 'Group Creation and Link Management',
+      title: "Group Creation and Link Management",
       description:
-        'LinkRoot allows users to create customizable groups where they can add and manage their links. This feature is ideal for organizing links related to different topics, projects, or personal pages.',
+        "LinkRoot allows users to create customizable groups where they can add and manage their links. This feature is ideal for organizing links related to different topics, projects, or personal pages.",
       details:
-        'With an intuitive interface, users can effortlessly add, edit, or delete links within each group, providing a streamlined experience.',
+        "With an intuitive interface, users can effortlessly add, edit, or delete links within each group, providing a streamlined experience.",
     },
     {
-      title: 'Unique QR Code Generation',
+      title: "Unique QR Code Generation",
       description:
-        'Every group created on LinkRoot automatically generates a unique QR code. This makes sharing easier and more engaging, providing a quick way for others to access your grouped links.',
+        "Every group created on LinkRoot automatically generates a unique QR code. This makes sharing easier and more engaging, providing a quick way for others to access your grouped links.",
       details:
-        'The QR codes are dynamic, reflecting real-time changes made to the group, ensuring the shared content is always up-to-date.',
+        "The QR codes are dynamic, reflecting real-time changes made to the group, ensuring the shared content is always up-to-date.",
     },
     {
-      title: 'Seamless Frontend-Backend Integration',
+      title: "Seamless Frontend-Backend Integration",
       description:
-        'Built with React and JavaScript on the frontend and Django with REST API on the backend, LinkRoot provides a fast and responsive user experience. The integration ensures reliable communication between the client and server.',
+        "Built with React and JavaScript on the frontend and Django with REST API on the backend, LinkRoot provides a fast and responsive user experience. The integration ensures reliable communication between the client and server.",
       details:
-        'Using Djoser for authentication, LinkRoot provides secure and efficient user management, allowing users to sign up, log in, and manage their accounts seamlessly.',
+        "Using Djoser for authentication, LinkRoot provides secure and efficient user management, allowing users to sign up, log in, and manage their accounts seamlessly.",
     },
   ];
 
