@@ -117,8 +117,8 @@ export default function Dashboard() {
         {/* QR Code Modal */}
         <dialog id="qr_modal" className="modal">
           <div className="modal-box">
-            <h3 className="font-bold text-lg">QR Code</h3>
-            <div className="flex items-center gap-4" ref={qrCodeRef}>
+            <h3 className="font-bold text-lg text-center">Your LinkRoot</h3>
+            <div className="flex items-center gap-4 justify-center items-center" ref={qrCodeRef}>
               {selectedGroupQR && (
                 <>
                   {/* QR Code */}
@@ -129,14 +129,9 @@ export default function Dashboard() {
                   />
                 </>
               )}
-              {/* Image on the right side */}
-              <img
-                src="/linkroot.png" // Replace with your actual image URL
-                alt="QR Code Side Image"
-                className="object-contain h-40 w-40"
-              />
+              
             </div>
-            <div className="modal-action flex gap-4">
+            <div className="modal-action flex gap-4 justify-center items-center">
               <button className="btn btn-primary" onClick={downloadQRCode}>
                 Download QR Code
               </button>

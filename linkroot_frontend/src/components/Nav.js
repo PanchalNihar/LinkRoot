@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className="p-3 flex bg-white justify-between items-center fixed top-0 left-0 right-0 z-20 shadow-md">
       {/* Brand Section */}
       <Link to="/" id="brand" className="flex gap-2 items-center flex-1">
-        <img className="object-cover max-w-12 max-h-12" src={logo} alt="Logo" />
+        <img className="object-cover max-w-12 max-h-12" src="/linkroot1.png" alt="Logo" />
         <span className="text-lg font-medium font-display">LinkRoot</span>
       </Link>
 
